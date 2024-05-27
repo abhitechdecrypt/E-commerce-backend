@@ -106,4 +106,10 @@ public class ProductEcommServiceImpl implements ProductEcommerceService {
 		return order;
 	}
 
+	@Override
+	public Product findProductByCategory(String category) {
+		Product product = productRepository.findByCategory(category);
+		return product;
+	}
+
 }

@@ -25,6 +25,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("api/v1/ecommerce/product")
@@ -33,26 +34,19 @@ public class ProductEcommController {
 	@Autowired
 	ProductEcommServiceImpl productEcommerceService;
 
-	
-	@Operation(summary = "Fetch Product Data API", 
-			description = "REST API to fetch data inside E-commerce website ")
+	@Operation(summary = "Fetch Product Data API", description = "REST API to fetch data inside E-commerce website ")
 	@ApiResponses({ @ApiResponse(responseCode = "200", description = "HTTP Status CREATED"),
-			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", 
-			content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
 	@GetMapping("fetchProduct")
 	public ResponseEntity<?> getProductList() {
 		List<Product> productList = productEcommerceService.getProductList();
 		return ResponseEntity.status(HttpStatus.OK).body(productList);
 	}
 
-	
-	@Operation(summary = "Create Product Data API", 
-			description = "REST API to create data inside E-commerce website ")
+	@Operation(summary = "Create Product Data API", description = "REST API to create data inside E-commerce website ")
 	@ApiResponses({
-			@ApiResponse(responseCode = "201", description = "HTTP Status CREATED", 
-					content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", 
-			content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+			@ApiResponse(responseCode = "201", description = "HTTP Status CREATED", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
 	@PostMapping("createProduct")
 	public ResponseEntity<ApiResponseDTO<Product>> getNewProduct(@RequestBody Product product) {
 		Product newProduct = productEcommerceService.createNewproduct(product);
@@ -65,14 +59,10 @@ public class ProductEcommController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
-	
-	@Operation(summary = "Find product By ID API", 
-			description = "REST API to Find product By ID data inside E-commerce website ")
+	@Operation(summary = "Find product By ID API", description = "REST API to Find product By ID data inside E-commerce website ")
 	@ApiResponses({
-			@ApiResponse(responseCode = "302", description = "HTTP Status CREATED", 
-					content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", 
-			content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+			@ApiResponse(responseCode = "302", description = "HTTP Status CREATED", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
 	@GetMapping("findProduct/{productId}")
 	public ResponseEntity<ApiResponseDTO<Product>> getProductById(@PathVariable(name = "productId") Long productId) {
 		Product newProduct = productEcommerceService.getProductById(productId);
@@ -85,14 +75,10 @@ public class ProductEcommController {
 		return ResponseEntity.status(HttpStatus.FOUND).body(response);
 	}
 
-	
-	@Operation(summary = "Delete product By ID API", 
-			description = "REST API to Delete product By ID data inside E-commerce website ")
+	@Operation(summary = "Delete product By ID API", description = "REST API to Delete product By ID data inside E-commerce website ")
 	@ApiResponses({
-			@ApiResponse(responseCode = "202", description = "HTTP Status CREATED", 
-					content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", 
-			content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+			@ApiResponse(responseCode = "202", description = "HTTP Status CREATED", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
 	@DeleteMapping("deleteProduct/{productId}")
 	public ResponseEntity<ApiResponseDTO<Product>> deleteProduct(@PathVariable(name = "productId") Long productId) {
 		productEcommerceService.deleteProduct(productId);
@@ -104,16 +90,10 @@ public class ProductEcommController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
 	}
 
-	
-	
-	
-	@Operation(summary = "Update Product Data API", 
-			description = "REST API to update data inside E-commerce website ")
+	@Operation(summary = "Update Product Data API", description = "REST API to update data inside E-commerce website ")
 	@ApiResponses({
-			@ApiResponse(responseCode = "202", description = "HTTP Status CREATED",
-					content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error",
-			content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+			@ApiResponse(responseCode = "202", description = "HTTP Status CREATED", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
 	@PatchMapping("updateProduct/{productId}")
 	public ResponseEntity<ApiResponseDTO<Product>> updateProduct(@RequestBody Product product,
 			@PathVariable(name = "productId") Long productId) {
@@ -131,18 +111,16 @@ public class ProductEcommController {
 		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
 	}
-	@Operation(summary = "Order Product Data API", 
-			description = "REST API to Order Product inside E-commerce website ")
+
+	@Operation(summary = "Order Product Data API", description = "REST API to Order Product inside E-commerce website ")
 	@ApiResponses({
-		@ApiResponse(responseCode = "202", description = "HTTP Status CREATED",
-				content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-		@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error",
-		content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+			@ApiResponse(responseCode = "202", description = "HTTP Status CREATED", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
 	@PatchMapping("orderProduct/{productId}/{userId}")
 	public ResponseEntity<ApiResponseDTO<Order>> OrderProduct(@PathVariable(name = "userId") String userId,
 			@PathVariable(name = "productId") Long productId) {
 		Order orderedproduct = productEcommerceService.orderProduct(productId, Long.parseLong(userId));
-		
+
 		ApiResponseDTO<Order> response = new ApiResponseDTO<>();
 		if (orderedproduct == null) {
 			response.setCode("500");
@@ -154,6 +132,28 @@ public class ProductEcommController {
 			response.setData(orderedproduct);
 		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+	}
+
+	@Operation(summary = "Find Product by Category Data API", description = "REST API to find Product by category inside E-commerce website ")
+	@ApiResponses({
+			@ApiResponse(responseCode = "202", description = "HTTP Status CREATED", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+			@ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))) })
+	@GetMapping("findByCategory")
+	public ResponseEntity<?> getByCategory(@PathParam(value = "category") String category) {
+
+		Product product = productEcommerceService.findProductByCategory(category);
+		ApiResponseDTO<Product> response = new ApiResponseDTO<Product>();
+		if (product != null) {
+			response.setCode("302");
+			response.setMessage("Product Found");
+			response.setData(product);
+		} else {
+			response.setCode("302");
+			response.setMessage("Product Not Found");
+			response.setData(product);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		return ResponseEntity.status(HttpStatus.FOUND).body(response);
 	}
 
 }

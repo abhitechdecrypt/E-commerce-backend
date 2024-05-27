@@ -18,5 +18,7 @@ public interface ProductEcommerceService {
 	String deleteProduct(Long productId);
 	
 	Order orderProduct(Long productId, Long userId);
+	
+	Product findProductByCategory(String category);
 
 }
