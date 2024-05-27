@@ -39,7 +39,7 @@ public class Product {
 	@Column(nullable = false)
 	private Integer inventory;
 
-	private String imageUrl;
+	private String category;
 
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime createdAt;

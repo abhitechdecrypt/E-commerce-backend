@@ -60,7 +60,7 @@ public class ProductEcommServiceImpl implements ProductEcommerceService {
 				.orElseThrow(() -> new ProductNotFoundException("Product Not found with given ID :: " + id, "E404"));
 		if (productFound != null) {
 			try {
-				productFound.setImageUrl(product.getImageUrl());
+				productFound.setCategory(product.getCategory());
 				productFound.setManufacturer(product.getManufacturer());
 				productFound.setInventory(product.getInventory());
 				productFound.setPrice(product.getPrice());
